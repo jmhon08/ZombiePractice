@@ -17,4 +17,7 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-window.setTimeout(function() { $(".alert").alert('close'); }, 2000);
+$( document ).ready(function() {
+	window.setTimeout(function() { $(".alert").alert('close'); }, 2000);
+});
+

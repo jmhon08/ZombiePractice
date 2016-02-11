@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160207071321) do
+ActiveRecord::Schema.define(version: 20160207070758) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "articles", force: :cascade do |t|
     t.string   "name"
@@ -28,8 +31,8 @@ ActiveRecord::Schema.define(version: 20160207071321) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "assignments", ["role_id"], name: "index_assignments_on_role_id"
-  add_index "assignments", ["zombie_id"], name: "index_assignments_on_zombie_id"
+  add_index "assignments", ["role_id"], name: "index_assignments_on_role_id", using: :btree
+  add_index "assignments", ["zombie_id"], name: "index_assignments_on_zombie_id", using: :btree
 
   create_table "brains", force: :cascade do |t|
     t.integer  "zombie_id"
@@ -39,7 +42,7 @@ ActiveRecord::Schema.define(version: 20160207071321) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "brains", ["zombie_id"], name: "index_brains_on_zombie_id"
+  add_index "brains", ["zombie_id"], name: "index_brains_on_zombie_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -49,8 +52,8 @@ ActiveRecord::Schema.define(version: 20160207071321) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "comments", ["article_id"], name: "index_comments_on_article_id"
-  add_index "comments", ["zombie_id"], name: "index_comments_on_zombie_id"
+  add_index "comments", ["article_id"], name: "index_comments_on_article_id", using: :btree
+  add_index "comments", ["zombie_id"], name: "index_comments_on_zombie_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "title"
@@ -76,7 +79,9 @@ ActiveRecord::Schema.define(version: 20160207071321) do
     t.string   "last_sign_in_ip"
   end
 
-  add_index "zombies", ["email"], name: "index_zombies_on_email", unique: true
-  add_index "zombies", ["reset_password_token"], name: "index_zombies_on_reset_password_token", unique: true
+  add_index "zombies", ["email"], name: "index_zombies_on_email", unique: true, using: :btree
+  add_index "zombies", ["reset_password_token"], name: "index_zombies_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "comments", "articles"
+  add_foreign_key "comments", "zombies"
 end
