@@ -1,0 +1,38 @@
+<h1>New Brain</h1>
+
+<%= form_for(@brain) do |f| %>
+  <% if @brain.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@brain.errors.count, "error") %> prohibited this brain from being saved:</h2>
+
+      <ul>
+      <% @brain.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :flavor %><br>
+    <%= f.text_field :flavor %>
+  </div>
+  <div class="field">
+    <%= f.label "Zombie name" %><br>
+    <%= f.text_field :zombie_name %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+
+<%= link_to 'Back', brains_path %>
+
+

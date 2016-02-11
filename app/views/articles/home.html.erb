@@ -1,0 +1,25 @@
+<div class="container">
+
+
+  <!-- Jumbotron -->
+  <div class="jumbotron">
+    <h1>ZOMBIE BLOG</h1>
+    <p class="lead">A safe place to talk about eating brains, zombie sports, and undead celebrities</p>
+    <%= link_to 'Create New Article', new_article_path, class: "btn btn-large btn-success" %>
+  </div>
+
+  <hr>
+
+
+  <div class="container">
+    <div class="row">
+      <% @latest_articles.each do |la| %>
+        <div class="col-md-4">
+          <h2><%= la.name %></h2>
+          <p><%= truncate(la.body, length: 250, separator: ' ') %></p>
+          <p><%= link_to "View details &raquo;".html_safe, la, class: "btn btn-default", role: "button" %></p>
+        </div>
+      <% end %>
+    </div>   
+  </div> <!-- /container -->  
+</div> <!-- /container -->  

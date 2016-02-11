@@ -1,0 +1,32 @@
+<h1>Zombies</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Bio</th>
+      <th>Age</th>
+      <th>Brain flavor</th>
+      <th>Roles</th>
+      <th colspan="5"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @zombies.each do |zombie| %>
+      <tr>
+        <td><%= link_to zombie.name, zombie %></td>
+        <td><%= zombie.bio %></td>
+        <td><%= zombie.age %></td>
+        <td><%= zombie.brain.flavor if zombie.brain %></td>
+        <td><%= zombie.roles_list.join(", ") if zombie.roles %></td>
+        <td><%= link_to 'Edit', edit_zombie_path(zombie) if current_zombie.admin? %></td>
+        <td><%= link_to 'Destroy', zombie, method: :delete, data: { confirm: 'Are you sure?' } if current_zombie.admin? %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Zombie', new_zombie_path %>
